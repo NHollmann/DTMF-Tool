@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/DTMF-Tool/precache-manifest.631205e4f0483d89cfed9efe52b63a50.js"
+  "/DTMF-Tool/precache-manifest.7af672c9be16d1dfd7cff62bdc2415ef.js"
 );
 
 self.addEventListener('message', (event) => {
