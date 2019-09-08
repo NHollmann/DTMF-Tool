@@ -1,6 +1,6 @@
 {
-  "short_name": "DTFM",
-  "name": "DTFM Encoder/Decoder",
+  "short_name": "DTMF",
+  "name": "DTMF Encoder/Decoder",
   "icons": [
     {
       "src": "favicon.ico",
