@@ -15,12 +15,14 @@ const App: React.FC = () => {
         <Typography gutterBottom>
           This tool alows you to encode or decode DTFM signals.
         </Typography>
+        <br/>
 
         <Typography variant="h4">
           DTFM Encoder
         </Typography>
         <Encoder dtfm={dtfm} />
 
+        <br/>
         <Typography variant="h4">
           DTFM Decoder
         </Typography>
