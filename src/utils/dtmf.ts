@@ -1,17 +1,17 @@
 /**
- * This class is able to encode and output DTFM singals.
+ * This class is able to encode and output DTMF singals.
  */
 
 const COL = [1209, 1336, 1477, 1633];
 const ROW = [697, 770, 852, 941];
 const LETTERS = "123A456B789C*0#D".split('');
 
-export class DTFM {
+export class DTMF {
     private context: AudioContext;
     private duration: number;
 
     /**
-     * Initialises a new DTFM Encoder/Decoder.
+     * Initialises a new DTMF Encoder/Decoder.
      */
     constructor() {
         this.context = new (window.AudioContext || (window as any).webkitAudioContext)();

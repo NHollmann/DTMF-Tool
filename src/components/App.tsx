@@ -1,30 +1,30 @@
 import React from 'react';
 import { Container, Paper, Typography } from '@material-ui/core';
 import Encoder from './Encoder';
-import { DTFM } from '../utils/dtfm';
+import { DTMF } from '../utils/dtmf';
 
-const dtfm = new DTFM();
+const dtmf = new DTMF();
 
 const App: React.FC = () => {
   return (
     <Container maxWidth="md" style={{ padding: 20 }}>
       <Paper style={{ padding: 10 }}>
         <Typography variant="h3">
-          DTFM Encoder/Decoder
+          DTMF Encoder/Decoder
         </Typography>
         <Typography gutterBottom>
-          This tool alows you to encode or decode DTFM signals.
+          This tool alows you to encode or decode DTMF (dual-tone multi-frequency) signals.
         </Typography>
-        <br/>
+        <br />
 
         <Typography variant="h4">
-          DTFM Encoder
+          DTMF Encoder
         </Typography>
-        <Encoder dtfm={dtfm} />
+        <Encoder dtmf={dtmf} />
 
-        <br/>
+        <br />
         <Typography variant="h4">
-          DTFM Decoder
+          DTMF Decoder
         </Typography>
       </Paper>
     </Container>
