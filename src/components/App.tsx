@@ -26,6 +26,10 @@ const App: React.FC = () => {
         <Typography variant="h4">
           DTMF Decoder
         </Typography>
+        <Typography>
+          Coming soon.
+        </Typography>
+        <br />
       </Paper>
     </Container>
   );

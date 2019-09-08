@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, Typography } from '@material-ui/core';
+import { Grid, Button, Typography, Slider } from '@material-ui/core';
 import { DTMF } from '../utils/dtmf';
 
 interface Props {
@@ -7,8 +7,29 @@ interface Props {
 }
 
 const Encoder = ({ dtmf }: Props) => {
+    const [duration, setDuration] = React.useState(0.2);
+
+    const handleDurationChange = (event: any, newValue: number | number[]) => {
+        if (!Array.isArray(newValue)) {
+            setDuration(newValue);
+            dtmf.setDuration(newValue);
+        }
+    };
+
     return (
         <>
+            <Typography gutterBottom>
+                Use this slider to set the duration of the tones.
+            </Typography>
+            <Slider 
+                value={duration} 
+                onChange={handleDurationChange}
+                min={0.1}
+                max={2.0}
+                step={0.1}
+                valueLabelDisplay={"auto"}
+                valueLabelFormat={x => `${x}s`}
+                aria-labelledby="continuous-slider" />
             <Typography gutterBottom>
                 Use this dialpad to create the corresponding DTMF tones.
             </Typography>
