@@ -1,11 +1,15 @@
 # DTMF-Tool
 A web based DTMF encoder/decoder.
 
+## Sources
+
+Goertzel: https://www.embedded.com/design/configurable-systems/4024443/The-Goertzel-Algorithm
+
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

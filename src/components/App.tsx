@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Paper, Typography } from '@material-ui/core';
 import Encoder from './Encoder';
 import { DTMF } from '../utils/dtmf';
+import Decoder from './Decoder';
 
 const dtmf = new DTMF();
 
@@ -26,10 +27,11 @@ const App: React.FC = () => {
         <Typography variant="h4">
           DTMF Decoder
         </Typography>
-        <Typography>
-          Coming soon.
-        </Typography>
+        <Decoder dtmf={dtmf} />
         <br />
+        <Typography variant="caption" gutterBottom>
+          A tool by <a href="https://nicolashollmann.de/">Nicolas Hollmann</a>.
+        </Typography>
       </Paper>
     </Container>
   );
