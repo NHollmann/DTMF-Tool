@@ -48,6 +48,13 @@ export class DTMF {
     }
 
     /**
+     * Clears the decoded message.
+     */
+    clearDecodedMessage() {
+        this.decodedMessage = "";
+    }
+
+    /**
      * Plays a single note.
      * A note can be a digit from 0 to 9, *, #, or the letters from A to D.
      * 
