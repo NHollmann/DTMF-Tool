@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/DTMF-Tool/static/css/main.6078d380.chunk.css",
-    "main.js": "/DTMF-Tool/static/js/main.0c85d0a2.chunk.js",
-    "main.js.map": "/DTMF-Tool/static/js/main.0c85d0a2.chunk.js.map",
-    "runtime~main.js": "/DTMF-Tool/static/js/runtime~main.a41927ed.js",
-    "runtime~main.js.map": "/DTMF-Tool/static/js/runtime~main.a41927ed.js.map",
-    "static/js/2.4d2eee2e.chunk.js": "/DTMF-Tool/static/js/2.4d2eee2e.chunk.js",
-    "static/js/2.4d2eee2e.chunk.js.map": "/DTMF-Tool/static/js/2.4d2eee2e.chunk.js.map",
+    "main.js": "/DTMF-Tool/static/js/main.d4b755f6.chunk.js",
+    "main.js.map": "/DTMF-Tool/static/js/main.d4b755f6.chunk.js.map",
+    "runtime-main.js": "/DTMF-Tool/static/js/runtime-main.75a643b3.js",
+    "runtime-main.js.map": "/DTMF-Tool/static/js/runtime-main.75a643b3.js.map",
+    "static/js/2.a200c2af.chunk.js": "/DTMF-Tool/static/js/2.a200c2af.chunk.js",
+    "static/js/2.a200c2af.chunk.js.map": "/DTMF-Tool/static/js/2.a200c2af.chunk.js.map",
     "index.html": "/DTMF-Tool/index.html",
-    "precache-manifest.272285006adedeeeba5801392cfb60ce.js": "/DTMF-Tool/precache-manifest.272285006adedeeeba5801392cfb60ce.js",
+    "precache-manifest.b5fddac8b76ae6e626018450ca95f7aa.js": "/DTMF-Tool/precache-manifest.b5fddac8b76ae6e626018450ca95f7aa.js",
     "service-worker.js": "/DTMF-Tool/service-worker.js",
-    "static/css/main.6078d380.chunk.css.map": "/DTMF-Tool/static/css/main.6078d380.chunk.css.map"
-  }
+    "static/css/main.6078d380.chunk.css.map": "/DTMF-Tool/static/css/main.6078d380.chunk.css.map",
+    "static/js/2.a200c2af.chunk.js.LICENSE.txt": "/DTMF-Tool/static/js/2.a200c2af.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.75a643b3.js",
+    "static/js/2.a200c2af.chunk.js",
+    "static/css/main.6078d380.chunk.css",
+    "static/js/main.d4b755f6.chunk.js"
+  ]
 }
