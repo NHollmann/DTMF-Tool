@@ -7,17 +7,10 @@ const COL = [1209, 1336, 1477, 1633];
 const ROW = [697, 770, 852, 941];
 const LETTERS = "123A456B789C*0#D".split('');
 
-const NUM_SAMPLES = 512;
-const MAGNITUDE_EPSILON = 0.05;
-const LETTER_HISTORY = 10;
-
 export class DTMF {
     private context: AudioContext;
     private duration: number;
-    private allFreqs: number[];
     private decodedMessage: string;
-    private letterHistory: Array<string | null>;
-    private lastLetter: string | null;
 
     /**
      * Initialises a new DTMF Encoder/Decoder.
@@ -25,10 +18,7 @@ export class DTMF {
     constructor() {
         this.context = new (window.AudioContext || (window as any).webkitAudioContext)();
         this.duration = 0.2;
-        this.allFreqs = [...ROW, ...COL];
         this.decodedMessage = "";
-        this.letterHistory = [];
-        this.lastLetter = null;
     }
 
     /**
@@ -77,32 +67,22 @@ export class DTMF {
      */
     captureDTMF(callback: (x: string | null) => void) {
         const handleSuccess = (stream: MediaStream) => {
-            const source = this.context.createMediaStreamSource(stream);
-            const processor = this.context.createScriptProcessor(NUM_SAMPLES, 1, 1);
+            
+            this.context.audioWorklet.addModule(process.env.PUBLIC_URL + "/worklet/dtfm-processor.js").then(() => {
+                const source = this.context.createMediaStreamSource(stream);
+                const dtfmNode = new AudioWorkletNode(this.context, 'dtfm-processor');
 
-            source.connect(processor);
-            processor.connect(this.context.destination);
+                dtfmNode.port.onmessage = (ev : MessageEvent<string>) => {
+                    if (ev.data) {
+                        this.decodedMessage += ev.data || "";
+                        callback(ev.data);
+                    }
+                };
 
-            processor.onaudioprocess = (e) => {
-
-                const mags = this.allFreqs.map(freq => {
-                    return this.goertzelMag(freq, e.inputBuffer.sampleRate, e.inputBuffer.getChannelData(0));
-                });
-
-                const letter = this.frequenciesToDtmf(mags);
-                const newLen = this.letterHistory.push(letter);
-                if (newLen > LETTER_HISTORY) {
-                    this.letterHistory.splice(0, 1);
-                }
-
-                if (this.letterHistory.every((x) => x === this.letterHistory[0]) &&
-                    this.letterHistory[0] !== this.lastLetter) {
-                    
-                    this.lastLetter = letter;
-                    this.decodedMessage += letter || "";
-                    callback(letter);
-                }
-            };
+                source.connect(dtfmNode);
+                dtfmNode.connect(this.context.destination);
+                this.context.resume();
+            });
         };
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -139,58 +119,5 @@ export class DTMF {
         osc2.start();
         osc1.stop(this.context.currentTime + this.duration + 0.1);
         osc2.stop(this.context.currentTime + this.duration + 0.1);
-    }
-
-    /**
-     * Calculates the magnitude of a target frequency in some samples using the
-     * Goertzel Algorithm.
-     * 
-     * @param freq the target frequency
-     * @param sampleRate the sample rate
-     * @param samples the actual samples
-     * @returns the calculated magnitude
-     */
-    private goertzelMag(freq: number, sampleRate: number, samples: Float32Array): number {
-        const k = Math.floor(0.5 + ((NUM_SAMPLES * freq) / sampleRate));
-        const omega = (2 * Math.PI * k) / NUM_SAMPLES;
-        const sine = Math.sin(omega);
-        const cosine = Math.cos(omega);
-        const coeff = cosine * 2;
-
-        let q0 = 0;
-        let q1 = 0;
-        let q2 = 0;
-
-        for (let i = 0; i < NUM_SAMPLES; i++) {
-            q0 = coeff * q1 - q2 + samples[i];
-            q2 = q1;
-            q1 = q0;
-        }
-
-        const real = (q1 - q2 * cosine);
-        const imag = (q2 * sine);
-
-        return Math.sqrt(real * real + imag * imag);
-    }
-
-    /**
-     * Calculates the detected letter from 8 magnitudes.
-     * 
-     * @param freqs 8 magnitudes
-     */
-    private frequenciesToDtmf(freqs: number[]): string | null {
-        const row = freqs.slice(0, 4).map((x, index) => ({ index, freq: ROW[index], mag: x }));
-        const col = freqs.slice(4, 8).map((x, index) => ({ index, freq: COL[index], mag: x }));
-
-        const highestRow = row.reduce((prev, cur) => prev.mag > cur.mag ? prev : cur);
-        const highestCol = col.reduce((prev, cur) => prev.mag > cur.mag ? prev : cur);
-
-        if (highestCol.mag < MAGNITUDE_EPSILON || highestRow.mag < MAGNITUDE_EPSILON) {
-            return null;
-        }
-
-        const letterIndex = highestRow.index * 4 + highestCol.index;
-
-        return LETTERS[letterIndex];
     }
 };
