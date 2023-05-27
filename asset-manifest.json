@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/DTMF-Tool/static/css/main.772f2751.css",
-    "main.js": "/DTMF-Tool/static/js/main.c9d8d2b9.js",
+    "main.js": "/DTMF-Tool/static/js/main.fa6106c5.js",
     "index.html": "/DTMF-Tool/index.html",
     "main.772f2751.css.map": "/DTMF-Tool/static/css/main.772f2751.css.map",
-    "main.c9d8d2b9.js.map": "/DTMF-Tool/static/js/main.c9d8d2b9.js.map"
+    "main.fa6106c5.js.map": "/DTMF-Tool/static/js/main.fa6106c5.js.map"
   },
   "entrypoints": [
     "static/css/main.772f2751.css",
-    "static/js/main.c9d8d2b9.js"
+    "static/js/main.fa6106c5.js"
   ]
 }
